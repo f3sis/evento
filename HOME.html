@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Tarefas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .task-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .task-list li {
+      margin-bottom: 10px;
+    }
+
+    .task-item {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between; /* Adicionado para espaçamento entre os elementos */
+      align-items: flex-start;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .task-item .title {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .task-item .subtitle {
+      white-space: pre-line;
+      color: #888;
+      font-size: 0.8em;
+    }
+
+    .task-item .date {
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    .task-item .edit-button {
+      background-color: #4B80D6;
+      color: white;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 5px;
+      margin-right: 5px;
+    }
+    
+    .task-item .delete-button {
+      background-color: #DC334C;
+      color: white;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 5px;
+      margin-right: 5px;
+    }
+
+    .task-item .edit-button:hover,
+    {
+      opacity: 0.8;
+    }
+
+    .add-task-form {
+      display: flex;
+      flex-direction: column;
+      margin-top: 20px;
+    }
+
+    .add-task-form input,
+    .add-task-form select,
+    .add-task-form textarea,
+    .add-task-form button {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .add-task-form button {
+      background-color: #4B80D6;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .delete-button {
+     background-color: #dc3545;
+     color: white;
+    }
+
+    .delete-button:hover {
+    background-color: #c82333;
+    }
+
+    .add-task-form button:hover {
+      background-color: #4B80D6;
+    }
+    
+
+    input[type="range"] {
+      width: 150px;
+      margin: 10px 0;
+    }
+
+    label {
+      margin-left: 10px;
+    }
+
+    #slider-value {
+      margin-left: 5px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Lista de Tarefas</h1>
+
+  <form class="add-task-form">
+    <div>
+      <input type="text" id="new-title-input" placeholder="Novo Fornecedor">
+      <button type="button" onclick="addNewTitle()">Adicionar</button>
+    </div>
+    <select id="title-select">
+      <option value="">Selecione um título</option>
+      <!-- As opções serão adicionadas dinamicamente -->
+    </select>
+    <textarea id="subtitle-input" placeholder="Descrição dos Produtos" rows="5"></textarea>
+    <input type="date" id="date-input">
+    <select id="filtered-title-select" onchange="filterByTitle()">
+      <option value="">Filtrar por título</option>
+      <!-- As opções serão adicionadas dinamicamente -->
+    </select>
+    <button type="button" onclick="addTask()">Adicionar</button>
+  </form>
+ <div>
+  <label for="status-radio">Status:</label>
+  <input type="radio" name="status" value="received" onchange="filterByStatus(true)" checked>Recebidas
+  <input type="radio" name="status" value="not-received" onchange="filterByStatus(false)">Não Recebidas
+</div>
+
+
+  <ul class="task-list"></ul>
+  
+
+  <script>
+    // Array de tarefas
+    const tasks = [];
+
+    // Array de títulos
+    const titles = [];
+
+    // Função para adicionar um novo título à lista suspensa
+    function addNewTitle() {
+      const newTitleInput = document.getElementById('new-title-input');
+      const newTitle = newTitleInput.value.trim();
+
+      if (newTitle !== '') {
+        titles.push(newTitle);
+
+        // Atualiza a lista suspensa de títulos
+        renderTitleOptions();
+        renderFilteredTitleOptions();
+
+        newTitleInput.value = '';
+      }
+    }
+
+    // Função para renderizar as opções da lista suspensa de títulos
+    function renderTitleOptions() {
+      const titleSelect = document.getElementById('title-select');
+      titleSelect.innerHTML = '';
+
+      const defaultOption = document.createElement('option');
+      defaultOption.value = '';
+      defaultOption.textContent = 'Fornecedores';
+      titleSelect.appendChild(defaultOption);
+
+      titles.forEach(title => {
+        const option = document.createElement('option');
+        option.value = title;
+        option.textContent = title;
+        titleSelect.appendChild(option);
+      });
+    }
+
+    // Função para renderizar as opções da lista suspensa de títulos filtrados
+    function renderFilteredTitleOptions() {
+      const filteredTitleSelect = document.getElementById('filtered-title-select');
+      filteredTitleSelect.innerHTML = '';
+
+      const defaultOption = document.createElement('option');
+      defaultOption.value = '';
+      defaultOption.textContent = 'Filtrar por Fornecedor';
+      filteredTitleSelect.appendChild(defaultOption);
+
+      titles.forEach(title => {
+        const option = document.createElement('option');
+        option.value = title;
+        option.textContent = title;
+        filteredTitleSelect.appendChild(option);
+      });
+    }
+
+    // Função para adicionar uma tarefa
+    function addTask() {
+      const titleSelect = document.getElementById('title-select');
+      const subtitleInput = document.getElementById('subtitle-input');
+      const dateInput = document.getElementById('date-input');
+
+      const title = titleSelect.value.trim();
+      const subtitle = subtitleInput.value.trim();
+      const date = dateInput.value;
+
+      if (title !== '') {
+        const task = {
+          title: title,
+          subtitle: subtitle,
+          date: date,
+          completed: false
+        };
+
+        tasks.push(task);
+
+        renderTasks();
+        subtitleInput.value = '';
+        dateInput.value = '';
+      }
+    }
+
+    // Função para renderizar as tarefas
+    function renderTasks() {
+      const taskList = document.querySelector('.task-list');
+      taskList.innerHTML = '';
+
+      const filteredTitleSelect = document.getElementById('filtered-title-select');
+      const filteredTitle = filteredTitleSelect.value.trim();
+
+      tasks.forEach((task, index) => {
+        if (filteredTitle === '' || task.title === filteredTitle) {
+          const li = document.createElement('li');
+          const taskItem = document.createElement('div');
+          const checkbox = document.createElement('input');
+          const titleSpan = document.createElement('span');
+          const subtitleDiv = document.createElement('div');
+          const dateDiv = document.createElement('div');
+          const buttonContainer = document.createElement('div');
+          const editButton = document.createElement('button');
+          const deleteButton = document.createElement('button');
+
+          checkbox.type = 'checkbox';
+          checkbox.checked = task.completed;
+          checkbox.addEventListener('change', () => {
+            // Marcar/desmarcar a tarefa como concluída
+            task.completed = checkbox.checked;
+          });
+
+          titleSpan.classList.add('title');
+          titleSpan.textContent = task.title;
+
+          subtitleDiv.classList.add('subtitle');
+          subtitleDiv.textContent = task.subtitle;
+
+          dateDiv.classList.add('date');
+          dateDiv.textContent = formatDate(task.date);
+
+          editButton.classList.add('add-task-button');
+          editButton.classList.add('edit-button');
+          editButton.textContent = 'Editar';
+          editButton.addEventListener('click', () => {
+            // Implemente a lógica para editar a tarefa
+            editTask(index);
+          });
+
+          deleteButton.classList.add('add-task-button');
+          deleteButton.classList.add('delete-button');
+          deleteButton.textContent = 'Excluir';
+          deleteButton.addEventListener('click', () => {
+            // Implemente a lógica para excluir a tarefa
+            deleteTask(index);
+          });
+
+          taskItem.classList.add('task-item');
+          buttonContainer.classList.add('button-container');
+          buttonContainer.appendChild(editButton);
+          buttonContainer.appendChild(deleteButton);
+
+          taskItem.appendChild(checkbox);
+          taskItem.appendChild(titleSpan);
+          taskItem.appendChild(subtitleDiv);
+          taskItem.appendChild(dateDiv);
+          taskItem.appendChild(buttonContainer);
+
+          li.appendChild(taskItem);
+          taskList.appendChild(li);
+        }
+      });
+    }
+
+    // Função para formatar a data no formato dd-mm-yyyy
+    function formatDate(dateString) {
+      const date = new Date(dateString);
+      const day = date.getDate().toString().padStart(2, '0');
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const year = date.getFullYear();
+
+      return `${day}-${month}-${year}`;
+    }
+
+    // Função para editar uma tarefa
+    function editTask(index) {
+      const task = tasks[index];
+
+      const titleSelect = document.getElementById('title-select');
+      const subtitleInput = document.getElementById('subtitle-input');
+      const dateInput = document.getElementById('date-input');
+
+      titleSelect.value = task.title;
+      subtitleInput.value = task.subtitle;
+      dateInput.value = task.date;
+
+      deleteTask(index);
+    }
+
+    // Função para excluir uma tarefa
+    function deleteTask(index) {
+      tasks.splice(index, 1);
+      renderTasks();
+    }
+
+    // Renderiza as opções da lista suspensa de títulos ao carregar a página
+    renderTitleOptions();
+    renderFilteredTitleOptions();
+
+    // Função para filtrar as tarefas com base no slider
+    function filterByStatus(status) {
+  const taskList = document.querySelector('.task-list');
+  const checkboxes = taskList.querySelectorAll('input[type="checkbox"]');
+
+  checkboxes.forEach(checkbox => {
+    const taskItem = checkbox.closest('.task-item');
+    const taskStatus = checkbox.checked;
+
+    if ((status && taskStatus) || (!status && !taskStatus)) {
+      taskItem.style.display = 'flex';
+    } else {
+      taskItem.style.display = 'none';
+    }
+  });
+}
+
+    // Função para filtrar as tarefas por título
+    function filterByTitle() {
+      const filteredTitleSelect = document.getElementById('filtered-title-select');
+      const filteredTitle = filteredTitleSelect.value.trim();
+
+      renderTasks();
+    }
+  </script>
+</body>
+</html>
