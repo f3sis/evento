@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Dados</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      padding: 20px;
+    }
+    
+    h2 {
+            font-size: 20px;
+            font-family: 'Roboto', sans-serif;
+            text-align: center; /* Centralizar o texto */
+            margin-top: 60px;
+            margin-bottom: 12px;
+        }
+        
+        h6 {
+            font-size: 13px;
+            font-family: 'Roboto', sans-serif;
+            text-align: center; /* Centralizar o texto */
+            margin-top: -10px;
+            margin-bottom: 0px;
+
+        }
+
+         /* Estilos para os cards */
+        .card-1 {
+            background-color: #e87d7d; /* Vermelho claro */
+            display: flex;
+            border: 10px; /* Remover borda */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+            height: 62px;
+            margin-bottom: 2px; /* Espaço entre os cards quando estão em linha */
+            margin-right: -13px; /* Espaço horizontal entre os cards */
+            margin-left: -12px; /* Espaço horizontal entre os cards */
+            margin-top: 45px;
+            text-align: center; /* Centralizar o texto */
+            border-radius: 4px;
+           
+        }
+        
+        
+        .card-2 {
+            background-color: #f0a475; /* Verde claro */
+            border: 10px; /* Remover borda */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+            height: 62px;
+            margin-bottom: 10px; /* Espaço entre os cards quando estão em linha */
+            margin-right: -13px; /* Espaço horizontal entre os cards */
+            margin-left: -12px; /* Espaço horizontal entre os cards */
+            margin-top: 45px;
+            text-align: center; /* Centralizar o texto */
+            border-radius: 4px;
+        }
+        .card-3 {
+            background-color: #edcb82; /* Amarelo claro */
+            border: 5px; /* Remover borda */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+            height: 62px;
+            margin-bottom: 10px; /* Espaço entre os cards quando estão em linha */
+            margin-right: -13px; /* Espaço horizontal entre os cards */
+            margin-left: -12px; /* Espaço horizontal entre os cards */
+            margin-top: 45px;
+            text-align: center; /* Centralizar o texto */
+            border-radius: 4px;
+        }
+        .card-4 {
+            background-color: #8adb99; /* Azul claro */
+            border: 10px; /* Remover borda */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+            height: 62px;
+            margin-bottom: -20px; /* Espaço entre os cards quando estão em linha */
+            margin-right: -13px; /* Espaço horizontal entre os cards */
+            margin-left: -12px; /* Espaço horizontal entre os cards */
+            text-align: center; /* Centralizar o texto */
+            border-radius: 4px;
+        }
+        .card-5 {
+            background-color: #84b6f4; /* Azul claro mais claro */
+            border: 10px; /* Remover borda */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+            height: 62px;
+            margin-bottom: -20px; /* Espaço entre os cards quando estão em linha */
+            margin-right: -13px; /* Espaço horizontal entre os cards */
+            margin-left: -12px; /* Espaço horizontal entre os cards */
+            text-align: center; /* Centralizar o texto */
+            border-radius: 4px;
+        }
+        
+        .card-6 {
+            background-color: #b4b4b4; /* Azul claro mais claro */
+            border: 10px; /* Remover borda */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+            height: 62px;
+            margin-bottom: -20px; /* Espaço entre os cards quando estão em linha */
+            margin-right: -13px; /* Espaço horizontal entre os cards */
+            margin-left: -12px; /* Espaço horizontal entre os cards */
+            text-align: center; /* Centralizar o texto */
+            border-radius: 4px;
+        }
+        
+        .card-text {
+            font-size: 18px; /* Aumentar o tamanho da fonte dos números */
+            font-family: 'Roboto', sans-serif;
+            color: #323232;
+            font-weight: bold;
+            margin-top: -5px;
+            margin-bottom: 10px;
+            margin-right: -17px; /* Espaço horizontal entre os cards */
+            margin-left: -14px; /* Espaço horizontal entre os cards */
+        }
+        
+        .form-CadastroContas {
+        margin-top: 30px; /* Ajustar o espaçamento superior para subir mais os botões */
+        margin-bottom: 0px;
+        margin-right: 0px;
+        margin-left: 0%;
+  
+        }
+        
+         /* Estilo para o alerta */
+        .custom-alert {
+          position: fixed;
+          top: 80%; /* Ajuste a posição vertical conforme necessário */
+          left: 18%; /* Ajuste a posição horizontal conforme necessário */
+          width: 65%; /* Ajuste a largura do alerta conforme necessário */
+          text-align: center; /* Centraliza o texto do alerta */
+        }
+        
+    
+  </style>
+</head>
+<body>
+  <div class="container">
+      <div id="cards-container" class="form-container"> <!-- FORMULÁRIO DOS CARDS -->
+    
+        <p class="mt-6 mb-3"></p>
+        <div class="row mt-6">
+    <div class="col-4">
+        <div class="card-1">
+            <div class="card-body">
+                <h6 class="card-title"><i class="fas fa-exclamation-circle"></i> Atrasados</h6>
+                <p class="card-text" id="valoresVencidos">Carregando...</p>
+            </div>
+            
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card-2">
+            <div class="card-body">
+                <h6 class="card-title"><i class="fas fa-calendar-day"></i> Hoje</h6>
+                <p class="card-text" id="valoresVencerHoje"></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+    <div class="card-3">
+        <div class="card-body">
+            <h6 class="card-title"><i class="fas fa-calendar-plus"></i> Amanhã</h6>
+            <p class="card-text" id="valoresVencerAmanha"></p>
+        </div>
+    </div>
+</div>
+    <div class="col-4">
+        <div class="card-4">
+            <div class="card-body">
+                <h6 class="card-title"><i class="fas fa-calendar-check"></i> No prazo</h6>
+                <p class="card-text" id="valoresNoPrazo"></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+    <div class="card-5">
+        <div class="card-body">
+            <h6 class="card-title"><i class="fas fa-check-circle"></i> Pagos</h6>
+            <p class="card-text" id="contasPagasCount"></p>
+        </div>
+    </div>
+</div>
+
+    <div class="col-4">
+        <div class="card-6">
+            <div class="card-body">
+                <h6 class="card-title"><i class="fas fa-dollar-sign"></i> Total</h6>
+                <p class="card-text" id="totalValor"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="form-CadastroContas">  
+    <h2>Cadastro de Dados</h2>
+    <form id="cadastroForm">
+      <div class="form-group">
+        <label for="fornecedorId">Fornecedor:</label>
+        <input type="text" class="form-control" id="fornecedorId" required>
+      </div>
+      <div class="form-group">
+        <label for="codigo">Código de barras:</label>
+        <input type="number" class="form-control" id="codigo" required>
+      </div>
+      <div class="form-group">
+        <label for="valor">Valor:</label>
+        <input type="number" class="form-control" id="valor" step="0.01" required>
+      </div>
+      <div class="form-group">
+        <label for="vencimento">Vencimento:</label>
+        <input type="date" class="form-control" id="vencimento" required>
+      </div>
+      <div class="form-group">
+        <label for="pagamento">Pagamento:</label>
+        <input type="date" class="form-control" id="pagamento" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+    </div>
+    
+    <h2>Filtrar por Data</h2>
+    <div class="form-group">
+      <label for="dataInicial">Vencimento Inicial:</label>
+      <input type="date" class="form-control" id="dataInicial">
+    </div>
+    <div class="form-group">
+      <label for="dataFinal">Vencimento Final:</label>
+      <input type="date" class="form-control" id="dataFinal">
+    </div>
+    <div class="form-group">
+      <label for="dataPInicial">Pagamento Inicial:</label>
+      <input type="date" class="form-control" id="dataPInicial">
+    </div>
+    <div class="form-group">
+      <label for="dataPFinal">Pagamento Final:</label>
+      <input type="date" class="form-control" id="dataPFinal">
+    </div>
+    <button id="filtroBtn" class="btn btn-primary">Filtrar</button>
+
+    <h2>Dados Cadastrados</h2>
+    <ul id="dadosCadastrados" class="list-group"></ul>
+
+    
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
+  <script>
+    // Configurar o Firebase com suas credenciais
+    const firebaseConfig = {
+      apiKey: "AIzaSyC-AZzKXWy6_mvNcF8QZWuusTjpo6Dj2Hw",
+        authDomain: "projetoweb-6232c.firebaseapp.com",
+        databaseURL: "https://projetoweb-6232c.firebaseio.com",
+        projectId: "projetoweb-6232c",
+        storageBucket: "projetoweb-6232c.appspot.com",
+        messagingSenderId: "341899111399",
+        appId: "1:341899111399:web:3c5edd575a96808c786b42"
+    };
+    
+    // Inicializar o Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    const db = firebase.firestore();
+
+    const cadastroForm = document.getElementById('cadastroForm');
+    const dadosCadastrados = document.getElementById('dadosCadastrados');
+    const filtroBtn = document.getElementById('filtroBtn');
+    const dataInicialInput = document.getElementById('dataInicial');
+    const dataFinalInput = document.getElementById('dataFinal');
+    const dataPInicialInput = document.getElementById('dataPInicial');
+    const dataPFinalInput = document.getElementById('dataPFinal');
+    const totalValor = document.getElementById('totalValor');
+    const valoresVencidos = document.getElementById('valoresVencidos');
+    const valoresVencerHoje = document.getElementById('valoresVencerHoje');
+    const valoresVencerAmanha = document.getElementById('valoresVencerAmanha');
+    const valoresNoPrazo = document.getElementById('valoresNoPrazo');
+
+    cadastroForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const data = document.getElementById('vencimento').value;
+      const descricao = document.getElementById('fornecedorId').value;
+      const valor = parseFloat(document.getElementById('valor').value);
+      const pagamento = document.getElementById('pagamento').value;
+      const codigo = document.getElementById('codigo').value;
+
+      db.collection('contasPagar').add({
+        vencimento: data,
+        fornecedorId: descricao,
+        valor: valor,
+        codigo: codigo,
+        pagamento: pagamento,
+        
+      })
+      .then(() => {
+        console.log('Dados cadastrados com sucesso!');
+        cadastroForm.reset();
+      })
+      .catch((error) => {
+        console.error('Erro ao cadastrar os dados:', error);
+      });
+    });
+    
+    // Função para criar o dropdown
+  function createDropdown(itemId) {
+    const dropdown = document.createElement('div');
+    dropdown.className = 'dropdown';
+
+    const button = document.createElement('button');
+    button.className = 'btn btn-secondary dropdown-toggle';
+    button.type = 'button';
+    button.id = `dropdownMenuButton_${itemId}`;
+    button.setAttribute('data-toggle', 'dropdown');
+    button.setAttribute('aria-haspopup', 'true');
+    button.setAttribute('aria-expanded', 'false');
+    button.textContent = 'Ações';
+
+    const dropdownMenu = document.createElement('div');
+    dropdownMenu.className = 'dropdown-menu';
+    dropdownMenu.setAttribute('aria-labelledby', `dropdownMenuButton_${itemId}`);
+
+    const editItem = document.createElement('a');
+    editItem.className = 'dropdown-item';
+    editItem.href = `edit.html?id=${itemId}`;
+    editItem.textContent = 'Editar';
+
+    const deleteItem = document.createElement('a');
+    deleteItem.className = 'dropdown-item';
+    deleteItem.href = '#'; // Coloque o link ou função de exclusão aqui
+    deleteItem.textContent = 'Excluir';
+
+    dropdownMenu.appendChild(editItem);
+    dropdownMenu.appendChild(deleteItem);
+
+    dropdown.appendChild(button);
+    dropdown.appendChild(dropdownMenu);
+
+    return dropdown;
+  }
+
+
+    // Atualizar a lista de dados cadastrados
+    function updateDataList(snapshot) {
+      dadosCadastrados.innerHTML = '';
+      let total = 0;
+      let totalVencidos = 0;
+      let totalVencerHoje = 0;
+      let totalVencerAmanha = 0;
+      let totalNoPrazo = 0;
+      let totalContasPagas = 0;
+      let totalAtrasados = 0;
+
+      snapshot.forEach((doc) => {
+        const data = doc.data().vencimento;
+        const descricao = doc.data().fornecedorId;
+        const valor = doc.data().valor;
+        const pagamento = doc.data().pagamento;
+        const codigo = doc.data().codigo;
+
+        total += valor;
+
+        // Lógica para cálculos dos diferentes estados de vencimento
+        const hoje = new Date();
+        const dat = doc.data();
+        const dataVencimento = new Date(data);
+        const dataPagamento = new Date(data);
+        const diffInDays = Math.ceil((dataVencimento - hoje) / (1000 * 60 * 60 * 24));
+        const diffInDaysP = Math.ceil((dataPagamento - hoje) / (1000 * 60 * 60 * 24));
+
+        if (diffInDays < 0) {
+          totalVencidos += valor;
+            
+        } else if (diffInDays === 0) {
+          totalVencerHoje += valor;
+        } else if (diffInDays === 1) {
+          totalVencerAmanha += valor;
+        } else if (diffInDays > 1) {
+          totalNoPrazo += valor;
+        } 
+            if (dat.pagamento) {
+          totalContasPagas += valor;
+        }
+        
+        totalAtrasados = totalVencidos - totalContasPagas;
+        
+      const listItem = document.createElement('li');
+        listItem.classList.add('list-group-item');
+      listItem.innerHTML = `
+        <div class="d-flex justify-content-between align-items-center">
+        <div class="itens-dlist">
+            <strong>Fornecedor:</strong>
+            <strong class="nome-fornecedor">${descricao}</strong><br>
+            <strong>Código de Barras:</strong> ${codigo}
+            <i class="far fa-copy ml-2" style="cursor: pointer;" onclick="copyDescription('${codigo}')"></i><br>
+            <strong>Data de Vencimento:</strong> ${data}<br>
+            <strong>Valor:</strong> R$ 
+            <class="item-valor">${valor.toFixed(2)}<br>
+            <strong>Data de Pagamento:</strong> ${pagamento}<br>
+            </div>
+            </div>
+            <div class="dropdown editar-excluir-dropdown2">
+                <button class="btn btn-sm btn-secondary" type="button" id="dropdown_${doc.id}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-flip="false" style="background-color: transparent; border: none; color: #000;"><i class="fa fa-ellipsis-v"></i>
+                    
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_${doc.id}">
+                    <div class="itens-dropList2">
+                    <button class="dropdown-item editar-conta-btn" data-id="${doc.id}">✎ Editar</button>
+                    <button class="dropdown-item excluir-conta-btn" data-id="${doc.id}">✘  Excluir</button>
+                </div>
+            </div>
+        </div>
+    `;
+        dadosCadastrados.appendChild(listItem);
+
+    });
+        
+      totalValor.textContent = `R$ ${total.toFixed(2)}`;
+      valoresVencidos.textContent = `R$ ${totalAtrasados.toFixed(2)}`;
+      valoresVencerHoje.textContent = `R$ ${totalVencerHoje.toFixed(2)}`;
+      valoresVencerAmanha.textContent = `R$ ${totalVencerAmanha.toFixed(2)}`;
+      contasPagasCount.textContent = `R$ ${totalContasPagas.toFixed(2)}`;
+      valoresNoPrazo.textContent = `R$ ${totalNoPrazo.toFixed(2)}`;
+    }
+    
+    function copyDescription(descricao) {
+  const textarea = document.createElement('textarea');
+  textarea.value = descricao;
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand('copy');
+  document.body.removeChild(textarea);
+
+  const alertDiv = document.createElement('div');
+  alertDiv.className = 'alert alert-primary custom-alert';
+  alertDiv.role = 'alert';
+  alertDiv.textContent = 'Código de barras copiado!';
+
+  document.body.appendChild(alertDiv);
+
+  setTimeout(() => {
+    alertDiv.classList.add('fade');
+    alertDiv.classList.add('show');
+    setTimeout(() => {
+      document.body.removeChild(alertDiv);
+    }, 500); // Tempo de animação do fade (0.5s)
+  }, 2000); // Tempo que o alerta ficará visível (2s)
+}
+
+    // Filtro de datas
+    filtroBtn.addEventListener('click', () => {
+      const dataInicial = dataInicialInput.value;
+      const dataFinal = dataFinalInput.value;
+      const dataPInicial = dataPInicialInput.value;
+      const dataPFinal = dataPFinalInput.value;
+
+      if (dataInicial && dataFinal) {
+        db.collection('contasPagar')
+          .where('vencimento', '>=', dataInicial)
+          .where('vencimento', '<=', dataFinal)
+          .onSnapshot((snapshot) => {
+            updateDataList(snapshot);
+          });
+      } else if (dataPInicial && dataPFinal) {
+          db.collection('contasPagar')
+          .where('pagamento', '>=', dataPInicial)
+          .where('pagamento', '<=', dataPFinal)
+          .onSnapshot((snapshot) => {
+            updateDataList(snapshot);
+          });
+      }
+          
+          else{
+        // Se as datas não forem especificadas, exibir todos os dados
+        db.collection('contasPagar').onSnapshot((snapshot) => {
+          updateDataList(snapshot);
+        });
+      }
+    });
+    
+  
+
+    // Inicialmente, carregar todos os dados
+    db.collection('contasPagar').onSnapshot((snapshot) => {
+      updateDataList(snapshot);
+    });
+
+  </script>
+</body>
+</html>
